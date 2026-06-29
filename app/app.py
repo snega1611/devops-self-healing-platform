@@ -16,7 +16,7 @@ def home():
 @app.route("/health")
 def health():
     return {
-        "status": "healthy"
+        "status": "Healthy"
     }
 
 @app.route("/cpu-load")
