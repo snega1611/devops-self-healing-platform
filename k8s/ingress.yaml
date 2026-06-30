@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+
+metadata:
+  name: self-healing-app-ingress
+  namespace: devops-platform
+
+spec:
+  ingressClassName: nginx
+
+  rules:
+  - host: selfhealing.local
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: self-healing-app-service
+            port:
+              number: 80

@@ -21,9 +21,9 @@ spec:
       containers:
       - name: self-healing-app
 
-        image: self-healing-app:v1
+        image: sne16/self-healing-app:latest
 
-        imagePullPolicy: Never
+        imagePullPolicy: Always
 
         ports:
         - containerPort: 5000
