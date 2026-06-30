@@ -25,6 +25,29 @@ spec:
 
         imagePullPolicy: Always
 
+        env:
+        - name: ENVIRONMENT
+          valueFrom:
+            configMapKeyRef:
+              name: app-config
+              key: ENVIRONMENT
+
+        - name: APP_VERSION
+          valueFrom:
+            configMapKeyRef:
+              name: app-config
+              key: APP_VERSION
+
+        - name: API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: app-secret
+              key: API_KEY
+
+        volumeMounts:
+        - name: app-storage
+          mountPath: /data
+
         ports:
         - containerPort: 5000
 
@@ -36,3 +59,9 @@ spec:
           limits:
             cpu: "200m"
             memory: "256Mi"
+
+      volumes:
+        - name: app-storage
+
+          persistentVolumeClaim:
+            claimName: app-pvc

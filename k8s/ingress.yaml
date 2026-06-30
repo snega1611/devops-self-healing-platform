@@ -19,3 +19,11 @@ spec:
             name: self-healing-app-service
             port:
               number: 80
+
+      - path: /notify
+        pathType: Prefix
+        backend:
+          service:
+            name: notification-service
+            port:
+              number: 80
