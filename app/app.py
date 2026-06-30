@@ -46,12 +46,14 @@ def memory_load():
     return {
         "message": "Memory allocation increased"
     }
-    
-@app.route("/break-health")
-def break_health():
-    global health_status
-    health_status = False
-    return {"message": "Health check broken"}
+
+
+#@app.route("/break-health")
+#def break_health():
+    #global health_status
+    #health_status = False
+    #return {"message": "Health check broken"}
+
 
 
 health_status = True
