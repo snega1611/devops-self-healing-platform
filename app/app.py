@@ -64,7 +64,7 @@ def health():
     if not health_status:
         return {"status": "failed"}, 500
 
-    return {"status": "healthy"}
+    return {"status": "It is healthy"}
 
 @app.route("/crash")
 def crash():
