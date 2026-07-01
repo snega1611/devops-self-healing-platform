@@ -1,4 +1,4 @@
-# Kubernetes AI Incident Detection & Auto-Healing System
+# Kubernetes AI Incident Detection System
 
 ## Overview
 
