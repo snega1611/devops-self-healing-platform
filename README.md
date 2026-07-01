@@ -1,4 +1,4 @@
-# Kubernetes AI Incident Detection System
+# Kubernetes AI Incident Detection and Response System
 
 ## Overview
 
