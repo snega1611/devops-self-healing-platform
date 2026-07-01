@@ -217,15 +217,15 @@ The generated RCA report is automatically sent through email.
 
 ### Normal Monitoring State
 
-![Alert Normal]()
+![Alert Normal](images/Alert-Normal.png)
 
 ### Pod Failure
 
-![ImagePullBackOff](images/imagepullbackoff.png)
+![ImagePullBackOff](images/ImagePullBackoff.png)
 
 ### Grafana Alert Fired
 
-![Status Fired](images/status-fired.png)
+![Status Fired](images/Status-Firing.png)
 
 ### n8n Workflow
 
@@ -233,15 +233,11 @@ The generated RCA report is automatically sent through email.
 
 ### Flask API Response
 
-![Flask API Response](images/flask-api-response.png)
+![Flask API Response](images/FlaskAPIResponse.png)
 
 ### Email Incident Report
 
-![Email Response](images/email-response.png)
-
-### Recovery State
-
-![Status Normal](images/status-normal.png)
+![Email Response](images/Email-response.png)
 
 ---
 
