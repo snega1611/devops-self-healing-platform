@@ -13,12 +13,6 @@ def home():
         "status": "running"
     }
 
-@app.route("/health")
-def health():
-    return {
-        "status": "Healthy"
-    }
-
 @app.route("/cpu-load")
 def cpu_load():
 
