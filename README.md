@@ -1,4 +1,4 @@
-# AI-Powered Kubernetes Incident Response System
+# Kubernetes AI Incident Detection & Auto-Healing System
 
 ## Overview
 
