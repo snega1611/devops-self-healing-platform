@@ -347,14 +347,14 @@ The generated RCA report is automatically sent through email.
 
 ![Grafana Dashboard](images/grafana-dashboard.png)
 
-## 📌 Key Metrics & Panels
-
-### 🔹 Total Pods in Namespace
-
-```promql
-count(kube_pod_info{namespace="devops-platform"})
-
-Shows the total number of pods running in the namespace.
+```text
+count(kube_pod_info{namespace="devops-platform"}) → Shows total number of running pods in the namespace.
+kube_pod_status_ready{namespace="devops-platform"} → Indicates whether pods are in Ready state (1 = healthy, 0 = not ready).
+kube_horizontalpodautoscaler_status_current_replicas → Displays current number of replicas managed by HPA based on load.
+sum(rate(container_cpu_usage_seconds_total{namespace="devops-platform",pod!=""}[1m])) by (pod) * 100 → Shows CPU usage percentage per pod over time.
+sum(kube_pod_container_status_restarts_total{namespace="devops-platform"}) by (pod) → Tracks number of restarts per pod (used to detect CrashLoopBackOff issues).
+sum(container_memory_working_set_bytes{namespace="devops-platform",pod!=""}) by (pod) → Shows memory usage per pod in bytes (active working memory consumption).
+```
 
 ---
 
