@@ -24,52 +24,74 @@ This project reduces investigation time by automatically gathering evidence and 
 
 ---
 
-🔧 What I implemented
-☸️ Kubernetes Setup & Deployments
-Set up Minikube cluster
-Created and managed:
-Deployments
-ReplicaSets
-Services
-Performed rolling updates and debugging using kubectl
-🌐 Networking & Ingress
-Exposed applications using Kubernetes Service (ClusterIP/NodePort)
-Configured and tested Ingress controller for routing traffic
-Verified external access using ngrok tunnel for webhook testing
-💾 Storage & Volumes
-Implemented Persistent Volume (PV) and Persistent Volume Claim (PVC)
-Mounted shared storage inside pods
-Tested data persistence across pod restarts
-⚙️ Resource Management
-Defined CPU and Memory requests/limits
-Tested resource sharing behavior between pods
-Configured Horizontal Pod Autoscaler (HPA) based on CPU usage
-Observed scaling behavior under load
-❤️ Health & Reliability
-Implemented:
-Liveness probe
-Readiness probe
-Simulated failures like:
-ImagePullBackOff
-CrashLoopBackOff
-Probe failures
-Debugged using:
-kubectl logs
-kubectl describe
-kubectl get events
-📊 Observability & Alerting
-Integrated Grafana alert rules
-Monitored:
-Pod failures
-CPU usage anomalies
-Deployment health
-Triggered alerts via webhooks to n8n workflow
-🔁 Automation Flow (DevOps + AI)
-Alerts triggered n8n workflow
-Collected cluster diagnostics (pods, events, logs)
-Sent data to AI agent for root cause analysis
-Generated incident report automatically
+# 🔧 What I Implemented
 
+## ☸️ Kubernetes Setup & Deployments
+- Set up **Minikube cluster**
+- Created and managed:
+  - Deployments
+  - ReplicaSets
+  - Services  
+- Performed **rolling updates and debugging** using `kubectl`
+
+---
+
+## 🌐 Networking & Ingress
+- Exposed applications using Kubernetes **Service (ClusterIP / NodePort)**
+- Configured and tested **Ingress controller** for traffic routing
+- Verified external access using **ngrok tunnel** for webhook testing
+
+---
+
+## 💾 Storage & Volumes
+- Implemented **Persistent Volume (PV)** and **Persistent Volume Claim (PVC)**
+- Mounted shared storage inside pods
+- Tested **data persistence across pod restarts**
+
+---
+
+## ⚙️ Resource Management
+- Defined **CPU and Memory requests & limits**
+- Tested resource sharing behavior between pods
+- Configured **Horizontal Pod Autoscaler (HPA)** based on CPU usage
+- Observed **automatic scaling under load**
+
+---
+
+## ❤️ Health & Reliability
+- Implemented:
+  - Liveness probes
+  - Readiness probes
+- Simulated failures:
+  - ImagePullBackOff
+  - CrashLoopBackOff
+  - Probe failures
+- Debugged using:
+  - `kubectl logs`
+  - `kubectl describe`
+  - `kubectl get events`
+
+---
+
+## 📊 Observability & Alerting
+- Integrated **Grafana alert rules**
+- Monitored:
+  - Pod failures
+  - CPU usage anomalies
+  - Deployment health
+- Triggered alerts via **webhooks to n8n workflow**
+
+---
+
+## 🔁 Automation Flow (DevOps + AI)
+- Alerts trigger **n8n workflow automatically**
+- Collected cluster diagnostics:
+  - Pods
+  - Events
+  - Logs
+- Sent data to **AI agent for root cause analysis**
+- Generated **automated incident reports**
+  
 ## Architecture
 
 # AI-Powered Kubernetes Incident Analyzer
