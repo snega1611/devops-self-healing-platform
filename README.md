@@ -254,23 +254,48 @@ kubectl top pods
 
 Gemini analyzes the evidence and generates an RCA report.
 
-Example:
-
 ```text
-Primary Root Cause:
-Deployment references invalid image tag:
-sne16/self-healing-app:notexists
+New Incident recorded
 
-Evidence:
-- ImagePullBackOff detected
-- Manifest not found
-- Deployment rollout timed out
+# Incident Summary
 
-Impact:
-Application running with reduced availability
+## Failed Resource
 
-Recommended Fix:
-Update deployment with a valid image tag
+self-healing-app (Deployment)
+Pod: self-healing-app-5b77b747bd-9dcm4
+
+## Current Status
+
+The `self-healing-app` is unresponsive, failing both liveness and readiness probes, indicating that the application is not serving traffic or responding to health checks. The Horizontal Pod Autoscaler (HPA) associated with the deployment is also failing to fetch metrics.
+
+## Primary Root Cause
+
+The `self-healing-app` application running inside pod `self-healing-app-5b77b747bd-9dcm4` is unresponsive. Its Liveness and Readiness probes are failing with "context deadline exceeded", meaning the application process is not responding to HTTP requests on its health endpoint (port 5000, path /health).
+
+## Evidence
+
+*   `20m Warning Unhealthy pod/self-healing-app-5b77b747bd-9dcm4 Readiness probe failed: Get "http://10.244.0.104:5000/health": context deadline exceeded (Client.Timeout exceeded while awaiting headers)`
+*   `20m Warning Unhealthy pod/self-healing-app-5b77b747bd-9dcm4 Liveness probe failed: Get "http://10.244.0.104:5000/health": context deadline exceeded (Client.Timeout exceeded while awaiting headers)`
+*   `pods` output confirms `self-healing-app-5b77b747bd-9dcm4` is the currently running pod for the deployment.
+*   `top_pods` output for `self-healing-app-5b77b747bd-9dcm4` shows low CPU (1m) and Memory (22Mi) usage, which is consistent with an unresponsive application that is not actively processing requests or consuming resources.
+
+## Impact
+
+The `self-healing-app` service is currently unavailable or severely degraded as its only running pod is unresponsive and failing health checks. This will prevent users or other services from interacting with the application.
+
+## Recommended Fix
+
+*   `kubectl rollout restart deployment self-healing-app -n devops-platform`
+
+## Secondary Findings
+
+*   **Horizontal Pod Autoscaler (HPA) Metrics Failure**: The `self-healing-app-hpa` is unable to obtain CPU utilization metrics for scaling, evidenced by warnings such as "failed to get cpu utilization: unable to get metrics for resource cpu: unable to fetch metrics from resource metrics API: the server is currently unable to handle the request (get pods.metrics.k8s.io)", "no metrics returned from resource metrics API", and "Unauthorized". This indicates a potential issue with the metrics server or the HPA controller's access permissions, preventing dynamic scaling.
+*   **Historical Image Pull Failure**: A previous replica set (`self-healing-app-5d7687bd56`) and its associated pod (`self-healing-app-5d7687bd56-mklnc`) experienced `ImagePullBackOff` due to an attempt to pull a non-existent image (`sne16/self-healing-app:notexists`). This issue appears to be resolved, as the faulty replica set (`self-healing-app-5d7687bd56`) has been scaled down and its pod deleted according to recent events.
+*   **TaintManagerEviction Cancellations**: Multiple pods, including the currently unresponsive `self-healing-app-5b77b747bd-9dcm4` and `notification-service-5fb8867965-j6hng`, had their deletions cancelled by the TaintManager. While the deletions were cancelled, this suggests that there might be underlying, intermittent node health issues that Kubernetes is attempting to mitigate.
+
+## Confidence
+
+High
 ```
 
 ---
