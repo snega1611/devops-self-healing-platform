@@ -74,12 +74,23 @@ This project reduces investigation time by automatically gathering evidence and 
 ---
 
 ## 📊 Observability & Alerting
-- Integrated **Grafana alert rules**
-- Monitored:
-  - Pod failures
-  - CPU usage anomalies
-  - Deployment health
-- Triggered alerts via **webhooks to n8n workflow**
+
+Built a Grafana dashboard to monitor Kubernetes cluster health in real time.
+
+The dashboard includes:
+
+- CPU usage per pod (resource utilization tracking)
+- Memory usage per pod (stability monitoring)
+- Pod restart count (CrashLoopBackOff / ImagePullBackOff detection)
+- Deployment replica health (desired vs available state)
+- HPA scaling behavior visibility
+
+Configured alert rules for:
+- Pod failures (CrashLoopBackOff, ImagePullBackOff)
+- High CPU usage thresholds
+- Deployment health degradation
+
+Alerts are triggered via webhook and sent to n8n workflow for automated incident processing and AI-based root cause analysis.
 
 ---
 
@@ -331,6 +342,19 @@ The generated RCA report is automatically sent through email.
 ### Email Incident Report
 
 ![Email Response](images/Email-response.png)
+
+### Grafana Dashboard
+
+![Grafana Dashboard](images/grafana-dashboard.png)
+
+## 📌 Key Metrics & Panels
+
+### 🔹 Total Pods in Namespace
+
+```promql
+count(kube_pod_info{namespace="devops-platform"})
+
+Shows the total number of pods running in the namespace.
 
 ---
 
